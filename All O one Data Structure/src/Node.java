@@ -66,4 +66,12 @@ class AllOne {
             }
         }
     }
+
+    private void removeNode(Node node) {
+        Node prevNode = node.prev;
+        Node nextNode = node.next;
+
+        prevNode.next = nextNode;
+        nextNode.prev = prevNode;
+    }
 }
