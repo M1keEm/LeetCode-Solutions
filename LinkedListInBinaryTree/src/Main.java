@@ -1,5 +1,11 @@
 public class Main {
     public static void main(String[] args) {
+        ListNode head = new ListNode(4);
+        head.next = new ListNode(2);
+        head.next.next = new ListNode(8);
+
+        TreeNode root = new TreeNode(1);
+        //testing tree too long to implement locally, proceeded with cloud service
     }
 
     public boolean isSubPath(ListNode head, TreeNode root) {
@@ -20,4 +26,3 @@ public class Main {
         return dfs(node.left, head.next) || dfs(node.right, head.next); //if the values match and neither node nor head has ended, check the children of the current node with head.next node
     }
 }
-
