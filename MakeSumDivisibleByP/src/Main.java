@@ -1,38 +1,46 @@
+import java.util.HashMap;
+
 public class Main {
     public static void main(String[] args) {
         System.out.println("Hello, World!");
     }
 
+
     public int minSubarray(int[] nums, int p) {
         int n = nums.length;
-        long totalSum = 0;
+        int totalSum = 0;
 
-        // Calculate the total sum
+        // calculate the totalSum and target remainder
         for (int num : nums) {
-            totalSum += num;
+            totalSum = (totalSum + num) % p;
         }
 
-        // If the total sum is already divisible by p, no subarray needs to be removed
-        if (totalSum % p == 0) return 0;
+        int target = totalSum % p;
+        if (target == 0) {
+            return 0; // the array is divisible by p case
+        }
 
-        int minLen = n; // Initialize minLen to the size of the array
+        HashMap<Integer, Integer> modMap = new HashMap<>();
+        modMap.put(0, -1); // when the whole prefix is the answer
+        int currentSum = 0;
+        int minLen = n;
 
-        // Try removing every possible subarray
-        for (int start = 0; start < n; ++start) {
-            long subSum = 0; // Initialize subarray sum
-            for (int end = start; end < n; ++end) {
-                subSum += nums[end]; // Calculate the subarray sum
+        for (int i = 0; i < n; ++i) {
+            currentSum = (currentSum + nums[i]) % p;
 
-                // Check if removing this subarray makes the remaining sum divisible by p
-                long remainingSum = (totalSum - subSum) % p;
+            // calculate what we need to remove
+            int needed = (currentSum - target + p) % p;
 
-                if (remainingSum == 0) {
-                    minLen = Math.min(minLen, end - start + 1); // Update the smallest subarray length
-                }
+            // if the need remainder is present in the hashmap, consider current subarray
+            if (modMap.containsKey(needed)) {
+                minLen = Math.min(minLen, i - modMap.get(needed));
             }
+
+            // store the current remainder and its index in the hashmap
+            modMap.put(currentSum, i);
         }
 
-        // If no valid subarray is found, return -1
+        // if the result exists, ergo it is other than the predefined value of n, return said result
         return minLen == n ? -1 : minLen;
     }
 }
