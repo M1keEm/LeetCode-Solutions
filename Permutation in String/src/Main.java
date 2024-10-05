@@ -1,36 +1,28 @@
+import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) {
         Main main = new Main();
-        System.out.println(main.checkInclusion("ab", "eidbaooo"));
+        System.out.println(main.checkInclusion("abc", "eidbacooo"));
     }
 
-    boolean flag = false;
+//    boolean flag = false;
 
     public boolean checkInclusion(String s1, String s2) {
-        permute(s1, s2, 0);
-        return flag;
-    }
-
-    public String swap(String s, int i0, int i1) {
-        if (i0 == i1)
-            return s;
-        String s1 = s.substring(0, i0);
-        String s2 = s.substring(i0 + 1, i1);
-        String s3 = s.substring(i1 + 1);
-        return s1 + s.charAt(i1) + s2 + s.charAt(i0) + s3;
-    }
-
-    void permute(String s1, String s2, int l) {
-        if (l == s1.length()) {
-            if (s2.contains(s1))
-                flag = true;
-        } else {
-            for (int i = l; i < s1.length(); i++) {
-                s1 = swap(s1, l, i);
-                permute(s1, s2, l + 1);
-                s1 = swap(s1, l, i);
+        s1 = sortString(s1);
+        for(int i = 0; i<= s2.length() - s1.length(); i++){
+            if(s1.equals(sortString(s2.substring(i,  i + s1.length())))){
+                return true;
             }
         }
+        return false;
+
     }
+
+    private String sortString(String s1) {
+        char[] s1Array = s1.toCharArray();
+        Arrays.sort(s1Array);
+        return new String(s1Array);
+    }
+
 }
