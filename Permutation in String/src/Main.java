@@ -11,21 +11,21 @@ public class Main {
             return false;
         }
         int[] s1Letters = new int[26];
+        int[] s2Letters = new int[26];
 
         for (int i = 0; i < s1.length(); i++) {
             s1Letters[s1.charAt(i) - 97]++;
+            s2Letters[s2.charAt(i) - 97]++;
         }
 
-        for (int i = 0; i <= s2.length() - s1.length(); i++) {
-            int[] s2Letters = new int[26];
-            for (int j = 0; j < s1.length(); j++) {
-                s2Letters[s2.charAt(i + j) - 97]++;
-            }
+        for (int i = 0; i < s2.length() - s1.length(); i++) {
             if (matches(s1Letters, s2Letters)) {
                 return true;
             }
+            s2Letters[s2.charAt(i) - 97]--;
+            s2Letters[s2.charAt(i + s1.length()) - 97]++;
         }
-        return false;
+        return matches(s1Letters, s2Letters);
     }
 
     public boolean matches(int[] arr1, int[] arr2) {
