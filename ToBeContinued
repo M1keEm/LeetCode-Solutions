@@ -9,7 +9,6 @@ Extra Characters in a String
 Prefix Scores Sum
 Palindromes
 Design Circular Deque
-Make Sum Divisible by P
 Minimum Number of Swaps to Make the String Balanced
 Minimum Add to Make Parentheses Valid
 Maximum Width Ramp - other solutions (e.g. stack)
@@ -20,5 +19,6 @@ All O one Data Structure
 
 Finished:
 
+Make Sum Divisible by P
 Linked List
 Permutation in String - optimize solution, too big time complexity
