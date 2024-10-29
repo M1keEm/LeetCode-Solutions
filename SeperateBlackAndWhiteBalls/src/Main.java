@@ -7,7 +7,7 @@ public class Main {
     static class Solution {
         public long minimumSteps(String s) {
             long countSwaps = 0;
-            long firstSpaceForWhite = 0;
+            int firstSpaceForWhite = 0;
             for (int currentPosition = 0; currentPosition < s.length(); currentPosition++) {
                 if (s.charAt(currentPosition) == '0') {
                     countSwaps += currentPosition - firstSpaceForWhite;
